@@ -31,7 +31,7 @@ if ( !defined( 'JPD2_TRANS_PREFIX' ) ) {
  * @param array $args Arguments for the query. Required.
  * @param string $type What type of query to run WP_Query (default), WP_User_Query, or WP_Meta_Query. Optional.
  * @param string $name Name to assign to the transient. Can be used to get the transient directly via get_transient(). Required.
- * @param string|int $expire Set the maxiumum life of the transient. Optional.
+ * @param string|int $expire Set the maximum life of the transient. Optional.
  *
  * @return mixed|null|WP_Meta_Query|WP_Query|WP_User_Query
  *
@@ -58,3 +58,5 @@ if ( !function_exists( 'jpd2_transient_reset' ) ) {
         return $reset;
     }
 }
+
+?>
