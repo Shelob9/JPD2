@@ -48,6 +48,8 @@ endif;
 
 /**
  * Resets the transients when a post is updated.
+ *
+ * @since 0.0.1
  */
 if ( !function_exists( 'jpd2_transient_reset' ) ) {
     add_action( 'save_post', 'jpd2_transient_reset'  );
@@ -59,4 +61,36 @@ if ( !function_exists( 'jpd2_transient_reset' ) ) {
     }
 }
 
-?>
+/**
+ * Activation hook.
+ *
+ * Adds option 'jpd2_cached_names'
+ *
+ * @since 0.0.1
+ */
+register_activation_hook( __FILE__, 'jpd2_activate' );
+function jpd2_activate() {
+    $option_name = 'jpd2_cached_names';
+    $new_value = array();
+    if ( get_option( $option_name ) !== false ) {
+        update_option( $option_name, $new_value );
+    } else {
+        $deprecated = null;
+        $autoload = 'no';
+        add_option( $option_name, $new_value, $deprecated, $autoload );
+    }
+}
+
+/**
+ * Deactivation hook
+ *
+ * Removes 'jpd2_cached_names' option
+ *
+ * @TODO Consider clearing all transient this plugin created, instead of letting them die a natural death
+ *
+ * @since 0.0.1
+ */
+register_deactivation_hook( __FILE__, 'jpd2_deactivate' );
+function jpd2_deactivate() {
+    delete_option( 'jpd2_cached_names' );
+}
