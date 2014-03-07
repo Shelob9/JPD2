@@ -168,4 +168,3 @@ class jpd2_better_query {
     }
 }
 endif;
-
