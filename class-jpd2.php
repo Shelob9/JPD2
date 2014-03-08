@@ -86,7 +86,7 @@ class jpd2_better_query {
      * @return WP_User_Query
      *
      * @since 0.0.1
-     *//
+     */
     function do_user_query( $args ) {
         $query = new WP_User_Query( $args );
         return $query;
