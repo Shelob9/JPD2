@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: JPD2
-Plugin URI: https://github.com/shelob9/jpd2
+Plugin URI: http://joshpress.net/blog/jpd2/
 Description: Makes caching WordPress queries via the Transients API easy.
-Version: 0.0.1
+Version: 0.0.2
 Author: Josh Pollock
 Author URI: http://www.JoshPress.net
 License: GPLv2+

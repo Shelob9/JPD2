@@ -5,7 +5,7 @@ Donate link: http://JoshPress.net
 Tags: transients, caching
 Requires at least: 3.8
 Tested up to: 3.8.1
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,16 +57,9 @@ The [Transients API](http://codex.wordpress.org/Transients_API) creates temporar
 [This article](http://www.doitwithwp.com/introduction-transients-wordpress/) explains very well how that works. This plugin automates the process for you.
 
 = Is It Safe To Call This Function In My Theme Or Plugin? =
-The safest method would be to wrap the call in a check of function_exists(). For example:
+The safest method would be to wrap the call in a check of function_exists().
 
-$args = array( 'post_type => 'page', 'posts_per_page' => 3 );
-if ( function_exists( 'jpd2_better_query' ) {
-$name = foo;
-$foo_query = jpd2_better_query( $args, $name );
-}
-else {
-$foo_query = new WP_Query( $args);
-}
+For example code see: [https://gist.github.com/Shelob9/9425101#file-use_jpd2-php](https://gist.github.com/Shelob9/9425101#file-use_jpd2-php)
 
 This way if the JPD2 plugin is not activated, WordPress will run WP_Query directly, instead of returning a fatal error, which would suck.
 
@@ -95,6 +88,10 @@ Because Star Wars.
 
 = 0.0.1 =
 * The first version on WordPress.org.
+
+= 0.0.2 =
+* Readme change for better readability in FAQ
+* Update plugin URI
 
 == Upgrade Notice ==
 
