@@ -28,7 +28,7 @@ class jpd2_better_query {
      *
      * @since 0.0.1
      */
-    function cake_or_death( $args, $type= 'wp_query', $name, $expire= null ) {
+    function cake_or_death( $args, $type= 'wp_query', $name, $expire= null, $pod=null; ) {
         //if transient {$name} exists return it and move on with life
         if ( false === ( $query = get_transient( $name ) ) ) {
         //if not do query, cache results, live long and prosper.
@@ -44,6 +44,9 @@ class jpd2_better_query {
                 elseif ( $type === 'wp_meta_query' || $type === 'meta_query' ) {
                     $query = $this->do_meta_query( $args );
                 }
+				elseif( $type ='pods' && !is_null( $pod ) ) {
+					$query= $this->do_pods( $args, $pod );
+				}
                 else {
                     $query = NULL;
                 }
@@ -103,6 +106,11 @@ class jpd2_better_query {
         $query = new WP_Meta_Query( $args );
         return $query;
     }
+
+	function do_pods( $args, $pod ) {
+		$query  = pods( $pod, $args, $strict= TRUE );
+		return $query;
+	}
 
     /**
      * Deletes all transients set by this plugin when a post is updated.
