@@ -29,19 +29,20 @@ if ( !defined( 'JPD2_TRANS_PREFIX' ) ) {
  * Returns the cached query, or runs it and caches it.
  *
  * @param array $args Arguments for the query. Required.
- * @param string $type What type of query to run WP_Query (default), WP_User_Query, or WP_Meta_Query. Optional.
+ * @param string $type What type of query to run WP_Query (default), WP_User_Query, WP_Meta_Query, or Pods. Optional.
  * @param string $name Name to assign to the transient. Can be used to get the transient directly via get_transient(). Required.
  * @param string|int $expire Set the maximum life of the transient. Optional.
+ * @param string $pod The name of a pod to query if using the Pods class.
  *
  * @return mixed|null|WP_Meta_Query|WP_Query|WP_User_Query
  *
  * @since 0.0.1
  */
 if ( !function_exists( 'jpd2_better_query') ) :
-    function jpd2_better_query( $args, $type= 'wp_query', $name, $expire= null ) {
+    function jpd2_better_query( $args, $type= 'wp_query', $name, $expire= null, $pod=null ) {
         require_once( 'class-jpd2.php' );
         $jpd2 = new jpd2_better_query();
-        $query = $jpd2->cake_or_death( $args, $type= 'wp_query', $name, $expire= null );
+        $query = $jpd2->cake_or_death( $args, $type= 'wp_query', $name, $expire= null, $pod );
         return $query;
     }
 endif;
