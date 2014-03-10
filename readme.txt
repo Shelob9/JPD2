@@ -5,7 +5,7 @@ Donate link: http://JoshPress.net
 Tags: transients, caching
 Requires at least: 3.8
 Tested up to: 3.8.1
-Stable tag: 0.0.2
+Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,11 @@ Because Star Wars.
 = 0.0.2 =
 * Readme change for better readability in FAQ
 * Update plugin URI
+
+= 0.1.0
+* Fix conditional logic preventing non WP_Query queries from working.
+* Fix args in main function.
+* Support for Pods queries.
 
 == Upgrade Notice ==
 
