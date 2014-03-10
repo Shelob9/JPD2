@@ -28,46 +28,46 @@ class jpd2_better_query {
      *
      * @since 0.0.1
      */
-    function cake_or_death( $args, $type= 'wp_query', $name, $expire= null, $pod=null; ) {
-        //if transient {$name} exists return it and move on with life
-        if ( false === ( $query = get_transient( $name ) ) ) {
-        //if not do query, cache results, live long and prosper.
-            //if we have args, build the query
-            if ( isset( $args ) ) {
-                //Do the right query
-                if ( $type === 'wp_query' || $type = 'query' ) {
-                    $query = $this->do_wp_query( $args );
-                }
-                elseif ( $type === 'wp_user_query' || $type === 'user_query' ) {
-                    $query = $this->do_user_query( $args );
-                }
-                elseif ( $type === 'wp_meta_query' || $type === 'meta_query' ) {
-                    $query = $this->do_meta_query( $args );
-                }
+	function cake_or_death( $args, $type='wp_query', $name, $expire= null, $pod=null ) {
+		//if transient {$name} exists return it and move on with life
+		if ( false === ( $query = get_transient( $name ) ) ) {
+			//if not do query, cache results, live long and prosper.
+			//if we have args, build the query
+			if ( isset( $args ) ) {
+				//Do the right query
+				if ( $type === 'wp_query' || $type === 'query' ) {
+					$query = $this->do_wp_query( $args );
+				}
+				elseif ( $type === 'wp_user_query' || $type === 'user_query' ) {
+					$query = $this->do_user_query( $args );
+				}
+				elseif ( $type === 'wp_meta_query' || $type === 'meta_query' ) {
+					$query = $this->do_meta_query( $args );
+				}
 				elseif( $type ='pods' && !is_null( $pod ) ) {
 					$query= $this->do_pods( $args, $pod );
 				}
-                else {
-                    $query = NULL;
-                }
-                //use default expire time if not set
-                if ( is_null( $expire ) ) {
-                    $expire = $this->expire();
-                }
-                //cache query for next time
-                if ( !is_null( $query ) ) {
-                    set_transient( $name, $query, $expire );
-                }
-                //add transient's name to list of transients to flush on new post
-                $this->names_list( $name );
-            //no args->no query
-            }
-            else {
-                $query = NULL;
-            }
-        }
-        return $query;
-    }
+				else {
+					$query = NULL;
+				}
+				//use default expire time if not set
+				if ( is_null( $expire ) ) {
+					$expire = $this->expire();
+				}
+				//cache query for next time
+				if ( !is_null( $query ) ) {
+					set_transient( $name, $query, $expire );
+				}
+				//add transient's name to list of transients to flush on new post
+				$this->names_list( $name );
+				//no args->no query
+			}
+			else {
+				$query = NULL;
+			}
+		}
+		return $query;
+	}
 
     //@TODO Why separate methods foreach?
 
