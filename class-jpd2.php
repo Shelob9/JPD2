@@ -23,6 +23,7 @@ class jpd2_better_query {
      * @param string $type What type of query to run WP_Query (default), WP_User_Query, or WP_Meta_Query. Optional.
      * @param string $name Name to assign to the transient. Can be used to get the transient directly via get_transient(). Required.
      * @param string|int $expire Set the maximum life of the transient. Optional.
+	 * @param string $pod The name of a pod to query if using the Pods class. Optional.
      *
      * @return mixed|null|WP_Meta_Query|WP_Query|WP_User_Query
      *
