@@ -29,7 +29,7 @@ class jpd2_better_query {
      *
      * @since 0.0.1
      */
-	function cake_or_death( $args, $type='wp_query', $name, $expire= null, $pod=null ) {
+	function cache_or_query( $args, $type='wp_query', $name, $expire= null, $pod=null ) {
 		//if transient {$name} exists return it and move on with life
 		if ( false === ( $query = get_transient( $name ) ) ) {
 			//if not do query, cache results, live long and prosper.

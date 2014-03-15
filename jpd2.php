@@ -42,7 +42,7 @@ if ( !function_exists( 'jpd2_better_query') ) :
     function jpd2_better_query( $args, $type= 'wp_query', $name, $expire= null, $pod=null ) {
         require_once( 'class-jpd2.php' );
         $jpd2 = new jpd2_better_query();
-        $query = $jpd2->cake_or_death( $args, $type, $name, $expire, $pod );
+        $query = $jpd2->cache_or_query( $args, $type, $name, $expire, $pod );
         return $query;
     }
 endif;
