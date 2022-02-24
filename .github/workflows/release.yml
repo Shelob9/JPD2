@@ -15,11 +15,11 @@ jobs:
         npm -v
 
     - name: Zip
-        env:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-        run: |
-          npm i plugin-machine -g
-          plugin-machine plugin build --buildDir=output --token="$env:PLUGIN_MACHINE_TOKEN"
+      env:
+        PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+      run: |
+        npm i plugin-machine -g
+        plugin-machine plugin build --buildDir=output --token="$env:PLUGIN_MACHINE_TOKEN"
 
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@master
