@@ -1,0 +1,27 @@
+{
+    "slug": "jpd2",
+    "pluginId": 0,
+    "buildId": 0,
+    "entryPoints": {
+        "adminPages": [
+
+        ],
+        "blocks": [
+
+        ]
+    },
+    "buildIncludes": [
+        "jpd2.php",
+        "readme.txt",
+        "class-jpd2.php",
+        "vendor"
+    ],
+    "buildSteps": {
+        "dev": [
+            "composer install"
+        ],
+        "prod": [
+            "composer install --no-dev --prefer-dist -o"
+        ]
+    }
+}
