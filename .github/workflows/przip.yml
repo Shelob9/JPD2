@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Zip
-      env:
-        PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-      run: |
-        npm i plugin-machine -g
-        plugin-machine plugin build --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
-        plugin-machine plugin zip --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
+        env:
+          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+        run: |
+          npm i plugin-machine -g
+          plugin-machine plugin build --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
+          plugin-machine plugin zip --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
 
       - uses: actions/upload-artifact@v3
         with:
