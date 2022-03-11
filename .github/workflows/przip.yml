@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
+          name: jpd2.zip
           path: jpd2.zip
       - uses: actions/github-script@v6
         with:
