@@ -1,0 +1,29 @@
+name: Attatch Zip to Pull Request
+on: pull_request
+
+jobs:
+
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Zip
+      env:
+        PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+      run: |
+        npm i plugin-machine -g
+        plugin-machine plugin build --buildDir=output --token="$env:PLUGIN_MACHINE_TOKEN"
+        plugin-machine plugin zip --buildDir=output --token="$env:PLUGIN_MACHINE_TOKEN"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: jpd2.zip
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'A comment'
+            })
