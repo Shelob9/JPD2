@@ -5,26 +5,6 @@ jobs:
 
   welcome:
     runs-on: ubuntu-latest
-    steps:
-      - name: Zip
-        env:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-        run: |
-          npm i plugin-machine -g
-          echo "$env:GITHUB_WORKSPACE"
-          plugin-machine plugin build --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
-          plugin-machine plugin zip --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: jpd2.zip
-          path: jpd2.zip
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'A comment'
-            })
+    - uses: imaginarymachines/plugin-machine-builder
+      with:
+        milliseconds: 1000
