@@ -5,7 +5,7 @@ jobs:
 
   plugin_machine:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - uses: imaginarymachines/plugin-machine-builder@latest
         with:
-          milliseconds: 1000
+          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
