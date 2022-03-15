@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: imaginarymachines/plugin-machine-builder@0.1.3
         with:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+          token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
