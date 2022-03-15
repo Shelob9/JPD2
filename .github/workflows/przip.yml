@@ -6,6 +6,6 @@ jobs:
   plugin_machine:
     runs-on: ubuntu-latest
     steps:
-      - uses: imaginarymachines/plugin-machine-builder@latest
+      - uses: imaginarymachines/plugin-machine-builder@0.1.1
         with:
           PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
