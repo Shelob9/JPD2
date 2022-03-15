@@ -25,4 +25,9 @@ jobs:
           PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
         run: |
           npm i plugin-machine -g
-          plugin-machine plugin build --buildDir=output --pluginDir="$env:GITHUB_WORKSPACE" --token="$env:PLUGIN_MACHINE_TOKEN"
+          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build failure logs
+          path: ${{ github.workspace }}/output
