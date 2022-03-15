@@ -26,8 +26,15 @@ jobs:
         run: |
           npm i plugin-machine -g
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
-      - name: Upload
+          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+
+      - name: Upload build
         uses: actions/upload-artifact@v3
         with:
-          name: Build failure logs
+          name: output
           path: ${{ github.workspace }}/output
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v3
+        with:
+          name: zip
+          path: ${{ github.workspace }}/jpd2.zip
