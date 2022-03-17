@@ -27,17 +27,17 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log({context});
+            console.log({ context });
             let artifacts = await github.rest.actions.listArtifactsForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            if( 0 < artifacts.data.total_count ){
+            if (0 < artifacts.data.total_count) {
               let artifact = artifacts.data[0];
               await github.rest.issues.createComment({
                 issue_number: 1,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `[${artifact.name}](${artifact.archive_download_url}`)
-              })
+                body: `[${artifact.name}](${artifact.archive_download_url})`,
+              });
             }
