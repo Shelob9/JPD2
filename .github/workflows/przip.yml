@@ -32,8 +32,9 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            if (0 < artifacts.data.total_count) {
-              let artifact = artifacts.data[0];
+            artifacts = artifacts.data;
+            if (0 < artifacts.total_count) {
+              let artifact = artifacts.artifacts[0];
               await github.rest.issues.createComment({
                 issue_number: 1,
                 owner: context.repo.owner,
