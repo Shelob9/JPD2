@@ -27,7 +27,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            let artifacts = await octokit.rest.actions.listArtifactsForRepo({
+            let artifacts = await github.rest.actions.listArtifactsForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
