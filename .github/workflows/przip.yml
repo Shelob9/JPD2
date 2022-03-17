@@ -3,14 +3,33 @@ on: push
 
 jobs:
 
-  action:
+  plugin-machine
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - uses: imaginarymachines/plugin-machine-builder@main
+      - name: Zip
+        env:
+          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+        run: |
+          npm i plugin-machine -g
+          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v3
         with:
-          token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-          path: ${{ github.workspace }}
+          name: zip
+          path: ${{ github.workspace }}/jpd2.zip
+
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'A comment'
+            })
