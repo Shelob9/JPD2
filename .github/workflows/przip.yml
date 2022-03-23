@@ -2,43 +2,11 @@ name: Attatch Zip to Pull Request
 on: push
 
 jobs:
-
-  plugin-machine:
+  plugin_machine_builder:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: imaginarymachines/plugin-machine-builder@main
         with:
-          node-version: 16
-      - name: Zip
-        env:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-        run: |
-          npm i plugin-machine -g
-          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
-          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
-
-      - name: Upload ZIP
-        uses: actions/upload-artifact@v3
-        with:
-          name: jpd2.zip
-          path: ${{ github.workspace }}/jpd2.zip
-
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            console.log({ context });
-            let artifacts = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            artifacts = artifacts.data;
-            if (0 < artifacts.total_count) {
-              let artifact = artifacts.artifacts[0];
-              await github.rest.issues.createComment({
-                issue_number: 1,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `[${artifact.name}](${artifact.archive_download_url})`,
-              });
-            }
+          token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+          path: ${{ github.workspace }}
