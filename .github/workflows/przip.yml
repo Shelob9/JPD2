@@ -9,7 +9,7 @@ jobs:
       - uses: imaginarymachines/plugin-machine-builder@main
         with:
           token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-          path:
+          path: ${{ github.workspace }}
 
   add_zip_to_pr:
     runs-on: ubuntu-latest
