@@ -10,22 +10,4 @@ jobs:
         with:
           token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
           path: ${{ github.workspace }}
-
-  add_zip_to_pr:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - name: Plugin Machine
-        env:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-          PLUGIN_DIR: ${{ github.workspace }}
-          ZIP_NAME: 'jpd2.zip'
-          BUILD_DIR: 'output'
-        run: |
-          npm i plugin-machine -g
-          plugin-machine plugin build --buildDir="$env:BUILD_DIR" --pluginDir="$env:PLUGIN_DIR" --token="$env:PLUGIN_MACHINE_TOKEN"
-          plugin-machine plugin zip --buildDir="$env:BUILD_DIR" --pluginDir="$env:PLUGIN_DIR" --token="$env:PLUGIN_MACHINE_TOKEN"
-          plugin-machine upload  --fileName="$env:ZIP_NAME"  --filePath="$env:PLUGIN_DIR" --token="$env:PLUGIN_MACHINE_TOKEN"
+          zipname: jpd2.zip
