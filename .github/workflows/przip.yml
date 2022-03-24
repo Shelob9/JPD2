@@ -17,4 +17,5 @@ jobs:
           npm i plugin-machine -g
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
-          plugin-machine upload --fileName=jpd2.zip --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+          ls
+          plugin-machine upload --fileName=jpd2.zip --token="$env:PLUGIN_MACHINE_TOKEN"
