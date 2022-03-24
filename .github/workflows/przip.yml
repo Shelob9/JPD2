@@ -1,13 +1,20 @@
 name: Attatch Zip to Pull Request
-on: pull_request
+on: push
 
 jobs:
-  action:
+
+  plugin-machine:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: imaginarymachines/plugin-machine-builder@main
+      - uses: actions/setup-node@v2
         with:
-          token: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
-          path: ${{ github.workspace }}
-          zipname: jpd2.zip
+          node-version: 16
+      - name: Zip
+        env:
+          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
+        run: |
+          npm i plugin-machine -g
+          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="$env:PLUGIN_MACHINE_TOKEN"
+          plugin-machine upload --fileName=jpd2.zip --filePath="${{ github.workspace }}/jpd2.zip --token="$env:PLUGIN_MACHINE_TOKEN"
