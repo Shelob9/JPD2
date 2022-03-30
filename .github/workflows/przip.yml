@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: 16
       - name: Zip
+        id: pluginmachine
         env:
           PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
         run: |
@@ -18,4 +19,12 @@ jobs:
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           OUTPUT=`plugin-machine upload --fileName=jpd2.zip --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"`
-          echo $OUTPUT
+          echo "::set-output name=url::$OUTPUT"
+      - uses: jwalton/gh-find-current-pr@v1
+        id: finder
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ steps.finder.outputs.pr }}
+          message: |
+            SHA ${{ github.sha }}
+            LINK: ${{steps.pluginmachine.url}}
