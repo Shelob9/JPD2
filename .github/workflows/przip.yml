@@ -26,6 +26,7 @@ jobs:
         id: finder
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
+          append: true
           number: ${{ steps.finder.outputs.pr }}
           message: |
             SHA ${{ github.sha }}
