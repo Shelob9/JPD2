@@ -19,7 +19,8 @@ jobs:
           npm i plugin-machine -g
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
-          OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet --token=${{ secrets.PLUGIN_MACHINE_TOKEN }}"
+          OUTPUT=`plugin-machine upload --fileName=jpd2.zip --quiet --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"`
+          echo $OUTPUT
           echo "::set-output name=url::$OUTPUT"
       # Get PR number and then comment on it
       - uses: jwalton/gh-find-current-pr@v1
