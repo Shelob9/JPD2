@@ -27,4 +27,4 @@ jobs:
           number: ${{ steps.finder.outputs.pr }}
           message: |
             SHA ${{ github.sha }}
-            LINK: ${{steps.pluginmachine.url}}
+            LINK: ${{steps.pluginmachine.outputs.url}}
