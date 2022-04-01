@@ -13,11 +13,9 @@ jobs:
       # Build plugin for prod, zip and upload
       - name: Zip
         id: pluginmachine
-        env:
-          PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
         run: |
-          export PLUGIN_MACHINE_TOKEN="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           npm i plugin-machine -g
+          plugin-machine login --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}"
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}"
           OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet"
