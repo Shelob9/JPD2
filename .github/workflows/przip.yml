@@ -16,6 +16,7 @@ jobs:
         env:
           PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
         run: |
+          export PLUGIN_MACHINE_TOKEN="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
           npm i plugin-machine -g
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}"
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}"
