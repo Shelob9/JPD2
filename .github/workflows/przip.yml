@@ -14,16 +14,22 @@ jobs:
       - name: Zip
         id: pluginmachine
         run: |
+          # Install Plugin Machine CLI
           npm i plugin-machine -g
+          # Login
           plugin-machine login --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}" --ci
+          # Build plugin with npm/composer as set in pluginMachine.json's build.prod key.
           plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}"
+          # Create a zip with files/ paths set in pluginMachine.json's buildIncludes key
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}"
+          # Upload zip to Plugin Machine API
           OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet"
           echo $OUTPUT
           echo "::set-output name=url::$OUTPUT"
-      # Get PR number and then comment on it
+      # Get PR number 
       - uses: jwalton/gh-find-current-pr@v1
         id: finder
+      # Comment on PR
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           append: true
