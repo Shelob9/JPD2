@@ -17,9 +17,9 @@ jobs:
           PLUGIN_MACHINE_TOKEN: ${{ secrets.PLUGIN_MACHINE_TOKEN }}
         run: |
           npm i plugin-machine -g
-          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
-          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}" --token="${{ secrets.PLUGIN_MACHINE_TOKEN }}"
-          OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet --token='${{ secrets.PLUGIN_MACHINE_TOKEN }}'"
+          plugin-machine plugin build --buildDir=output --pluginDir="${{ github.workspace }}"
+          plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}"
+          OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet"
           echo $OUTPUT
           echo "::set-output name=url::$OUTPUT"
       # Get PR number and then comment on it
