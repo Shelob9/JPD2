@@ -23,10 +23,10 @@ jobs:
           # Create a zip with files/ paths set in pluginMachine.json's buildIncludes key
           plugin-machine plugin zip --buildDir=output --pluginDir="${{ github.workspace }}"
           # Upload zip to Plugin Machine API
-          OUTPUT="plugin-machine upload --fileName=jpd2.zip --quiet"
+          OUTPUT=`plugin-machine upload --fileName=jpd2.zip --quiet`
           echo $OUTPUT
           echo "::set-output name=url::$OUTPUT"
-      # Get PR number 
+      # Get PR number
       - uses: jwalton/gh-find-current-pr@v1
         id: finder
       # Comment on PR
