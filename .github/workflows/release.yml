@@ -27,4 +27,4 @@ jobs:
         SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: jpd2
-        BUILD_DIR: 'output'
+        BUILD_DIR: output
